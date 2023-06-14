@@ -144,19 +144,16 @@ def show_exam_result(request, course_id, submission_id):
     submission = Submission.objects.get(pk=submission_id)
     choices = submission.choices.all()
     total_marks = 0
-    marks = 0
+    grade = 0
     for question in course.question_set.all():
         total_marks += question.grade
-        correct_choices = question.choice_set.filter(is_correct=True)
-        incorrect_choices = question.choice_set.filter(is_correct=False)
-
-        if all(choice in choices for choice in correct_choices) and all(choice not in choices for choice in incorrect_choices):
-            marks += question.grade
+        if question.is_get_score(choices):
+            grade += question.grade
 
     context = {
         'course': course,
         'choices': choices,
-        'grade': int(marks / total_marks * 100)
+        'grade': int(grade / total_marks * 100)
     }
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
     

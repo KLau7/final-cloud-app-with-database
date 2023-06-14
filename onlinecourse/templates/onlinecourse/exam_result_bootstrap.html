@@ -60,18 +60,17 @@
     </nav>
 
     <div class="container-fluid">
-      <div>{{grade}}</div>
       {% if grade > 80 %}
       <div class="alert alert-success">
         <!--HINT Display passed info -->
-        Congratualations, {{ user.first_name }}! You have passed the exam and
-        completed the course with score {{grade}} / 100
+        <b>Congratualations, {{ user.first_name }}!</b> You have passed the exam
+        and completed the course with score {{grade}} / 100
       </div>
       {% else %}
       <div class="alert alert-danger">
         <!--HINT Display failed info -->
-        Failed Sorry, {{ user.first_name }}! You have failed the exam with score
-        {{grade}} / 100
+        <b>Failed</b> Sorry, {{ user.first_name }}! You have failed the exam
+        with score {{grade}} / 100
       </div>
       <a
         class="btn btn-link text-danger"
@@ -91,9 +90,6 @@
             <div class="text-success">
               Correct answer: {{choice.choice_text}}
             </div>
-            <!--BLOCK-->
-            {% elif choice in choices and not choice.is_correct %}
-            <div class="text-danger">Wrong answer: {{choice.choice_text}}</div>
             {% elif not choice in choices and choice.is_correct %}
             <div class="text-warning">Not selected: {{choice.choice_text}}</div>
             {% else %}
