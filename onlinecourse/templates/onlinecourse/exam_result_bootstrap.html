@@ -92,8 +92,10 @@
               Correct answer: {{choice.choice_text}}
             </div>
             <!--BLOCK-->
+            {% elif choice in choices and not choice.is_correct %}
+            <div class="text-danger">Wrong answer: {{choice.choice_text}}</div>
             {% elif not choice in choices and choice.is_correct %}
-            <div class="text-warning">Not selected:{{choice.choice_text}}</div>
+            <div class="text-warning">Not selected: {{choice.choice_text}}</div>
             {% else %}
             <div>{{choice.choice_text}}</div>
             {% endif %}

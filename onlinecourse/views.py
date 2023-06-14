@@ -145,11 +145,14 @@ def show_exam_result(request, course_id, submission_id):
     choices = submission.choices.all()
     total_marks = 0
     marks = 0
-    for choice in choices:
-        grade = choice.question.grade
-        total_marks += grade
-        if choice.is_correct:
-            marks += grade
+    for question in course.question_set.all():
+        total_marks += question.grade
+        correct_choices = question.choice_set.filter(is_correct=True)
+        incorrect_choices = question.choice_set.filter(is_correct=False)
+
+        if all(choice in choices for choice in correct_choices) and all(choice not in choices for choice in incorrect_choices):
+            marks += question.grade
+
     context = {
         'course': course,
         'choices': choices,
