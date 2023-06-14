@@ -97,7 +97,7 @@
       >
         <form
           id="questionform"
-          action="{% url 'onlinecourse:submit' %}"
+          action="{% url 'onlinecourse:submit' course_id=course.id %}"
           method="post"
         >
           {% for question in course.question_set.all %}
@@ -123,6 +123,11 @@
             </div>
           </div>
           {% endfor %}
+          <input
+            class="btn btn-success btn-block"
+            type="submit"
+            value="Submit"
+          />
         </form>
       </div>
 
