@@ -47,7 +47,7 @@
                 <input
                   type="password"
                   class="form-control"
-                  placeholder="Username"
+                  placeholder="Password"
                   name="psw"
                 />
                 <button class="btn btn-primary" type="submit">Login</button>
@@ -91,6 +91,13 @@
             -->
 
       <!-- <HINT> If user is authenticated, show course exam with a list of question -->
+      <br />
+      <h3>Quiz</h3>
+      <div class="collapse {% if not user.is_authenticated %} show {% endif %}">
+        <div class="alert alert-info" role="alert">
+          You may only take the quiz if you are enrolled
+        </div>
+      </div>
       <div
         id="exam"
         class="collapse {% if user.is_authenticated %} show {% endif %}"
@@ -103,7 +110,9 @@
           {% for question in course.question_set.all %}
 
           <div class="card mt-1">
-            <div class="card-header"><h5>{{ question.question_text}}</h5></div>
+            <div class="card-header">
+              <h5>{{ question.question_text }}</h5>
+            </div>
             {% csrf_token %}
 
             <div class="form-group">
@@ -129,6 +138,7 @@
             value="Submit"
           />
         </form>
+        <br />
       </div>
 
       <!-- <HINT> Each example will have many questions -->

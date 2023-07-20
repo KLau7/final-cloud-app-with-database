@@ -45,7 +45,7 @@ class Learner(models.Model):
         choices=OCCUPATION_CHOICES,
         default=STUDENT
     )
-    social_link = models.URLField(max_length=200)
+    social_link = models.URLField(max_length=200, blank = True)
 
     def __str__(self):
         return self.user.username + "," + \
@@ -114,6 +114,9 @@ class Question(models.Model):
        else:
            return False
 
+    def __str__(self):
+        return self.question_text
+
 
 #  <HINT> Create a Choice Model with:
     # Used to persist choice content for a question
@@ -125,6 +128,9 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.TextField()
     is_correct = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.choice_text} ({self.question.question_text})'
 
 # <HINT> The submission model
 # One enrollment could have multiple submission
