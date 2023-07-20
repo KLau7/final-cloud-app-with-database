@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 # <HINT> add your cloud host here
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '.beaniesodyssey.com']
 
 # Application definition
 INSTALLED_APPS = [
